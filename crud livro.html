@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Acervo - CRUD</title>
+    <style>
+        :root {
+            --primary-bg: #f4f1ea;
+            --card-color: #2c3e50;
+            --accent-gold: #d4af37;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', serif;
+            background-color: var(--primary-bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Painel de Cadastro */
+        .admin-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+
+        .admin-panel h2 { margin-top: 0; color: var(--card-color); }
+
+        .form-group { margin-bottom: 15px; }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 12px;
+            background: var(--card-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Grid de Exibição */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Card Individual (O Link) */
+        .book-card-link {
+            text-decoration: none;
+            color: white;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .book-card-link:hover {
+            transform: translateY(-10px) rotate(-2deg);
+        }
+
+        .book-content {
+            background: var(--card-color);
+            height: 280px;
+            padding: 20px;
+            border-radius: 5px 15px 15px 5px;
+            border-left: 8px solid rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .book-content h3 { 
+            color: var(--accent-gold); 
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .book-content span { font-size: 0.9rem; opacity: 0.8; }
+
+        .book-price {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        /* Botão de Deletar (Sobreposto ao Link) */
+        .btn-delete {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 10;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="admin-panel">
+        <h2>Novo Livro no Acervo</h2>
+        <div class="form-group">
+            <input type="text" id="title" placeholder="Título do Livro">
+        </div>
+        <div class="form-group">
+            <input type="text" id="price" placeholder="Preço (Ex: 49.90)">
+        </div>
+        <div class="form-group">
+            <input type="text" id="url" placeholder="Link (URL de destino)">
+        </div>
+        <button class="btn-save" onclick="createBook()">Adicionar ao Catálogo</button>
+    </div>
+
+    <div class="book-grid" id="bookGrid">
+        </div>
+
+    <script>
+        function createBook() {
+            const title = document.getElementById('title').value;
+            const price = document.getElementById('price').value;
+            const url = document.getElementById('url').value;
+
+            if(!title || !price || !url) {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            const grid = document.getElementById('bookGrid');
+
+            // Criar o container do card
+            const container = document.createElement('div');
+            container.style.position = 'relative';
+
+            container.innerHTML = `
+                <button class="btn-delete" onclick="this.parentElement.remove()">X</button>
+                <a href="${url}" target="_blank" class="book-card-link">
+                    <div class="book-content">
+                        <h3>${title}</h3>
+                        <div style="width:30px; height:2px; background:var(--accent-gold); margin:10px 0;"></div>
+                        <div class="book-price">R$ ${parseFloat(price).toFixed(2)}</div>
+                        <span style="margin-top:20px;">Clique para ler ↗</span>
+                    </div>
+                </a>
+            `;
+
+            grid.appendChild(container);
+
+            // Limpar campos
+            document.getElementById('title').value = '';
+            document.getElementById('price').value = '';
+            document.getElementById('url').value = '';
+        }
+    </script>
+
+</body>
+</html>

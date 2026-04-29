@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Seguro | BookHaven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --paper: #ffffff;
+            --tinta: #1e293b;
+            --accent: #8b4513; /* Marrom Couro */
+            --borda: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--tinta);
+            padding: 40px 20px;
+        }
+
+        .checkout-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .card {
+            background: var(--paper);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--borda);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        /* --- FORMULÁRIO DE PAGAMENTO --- */
+        .metodo-pagamento {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .metodo-option {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid var(--borda);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .metodo-option.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: #fdfaf6;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; color: #64748b; }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--borda);
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--accent); }
+
+        .row { display: flex; gap: 15px; }
+
+        /* --- RESUMO DO PEDIDO --- */
+        .order-summary {
+            background: #1e293b;
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            height: fit-content;
+        }
+
+        .item-checkout {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .item-img {
+            width: 60px;
+            height: 80px;
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        .item-info h4 { font-family: 'Playfair Display', serif; font-size: 1rem; }
+        .item-info p { font-size: 0.8rem; opacity: 0.7; }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+
+        .total-row.grand-total {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .btn-finalizar {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-finalizar:hover { background: #6d360f; transform: translateY(-2px); }
+
+        /* Responsividade */
+        @media (max-width: 850px) {
+            .checkout-container { grid-template-columns: 1fr; }
+            .order-summary { order: -1; } /* Mostra o resumo primeiro no celular */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-container">
+        
+        <div class="checkout-form">
+            <h2>Pagamento</h2>
+            
+            <div class="card">
+                <div class="metodo-pagamento">
+                    <div class="metodo-option active">💳 Cartão</div>
+                    <div class="metodo-option">📱 PIX</div>
+                    <div class="metodo-option">📄 Boleto</div>
+                </div>
+
+                <form>
+                    <div class="form-group">
+                        <label>Número do Cartão</label>
+                        <input type="text" placeholder="0000 0000 0000 0000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nome no Cartão</label>
+                        <input type="text" placeholder="Como escrito no cartão">
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group" style="flex: 2;">
+                            <label>Validade</label>
+                            <input type="text" placeholder="MM/AA">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>CVV</label>
+                            <input type="text" placeholder="123">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>CPF do Titular</label>
+                        <input type="text" placeholder="000.000.000-00">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h2>Seu Pedido</h2>
+            
+            <div class="item-checkout">
+                <div class="item-img"></div>
+                <div class="item-info">
+                    <h4>Dom Casmurro</h4>
+                    <p>Machado de Assis</p>
+                    <strong>R$ 45,90</strong>
+                </div>
+            </div>
+
+            <div class="summary-details">
+                <div class="total-row">
+                    <span>Subtotal</span>
+                    <span>R$ 45,90</span>
+                </div>
+                <div class="total-row">
+                    <span>Frete</span>
+                    <span style="color: #4ade80;">Grátis</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>Total</span>
+                    <span>R$ 45,90</span>
+                </div>
+            </div>
+
+            <button class="btn-finalizar">CONFIRMAR COMPRA</button>
+            <p style="text-align: center; font-size: 0.7rem; opacity: 0.5; margin-top: 15px;">
+                🔒 Pagamento processado com criptografia de 256 bits.
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas | Gestão Literária</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-fundo: #f8fafc;
+            --cor-card: #ffffff;
+            --cor-tinta: #1e293b;
+            --cor-destaque: #0f172a;
+            --cor-dinheiro: #16a34a;
+            --borda: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-tinta);
+            padding: 30px;
+        }
+
+        .dashboard-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Título e Cabeçalho */
+        header {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+        }
+
+        /* --- CARDS DE RESUMO --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--cor-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--borda);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card span {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h2 {
+            font-size: 1.8rem;
+            color: var(--cor-destaque);
+        }
+
+        .stat-card.money h2 {
+            color: var(--cor-dinheiro);
+        }
+
+        /* --- TABELA DE VENDAS RECENTES --- */
+        .vendas-recentes {
+            background: var(--cor-card);
+            border-radius: 12px;
+            border: 1px solid var(--borda);
+            padding: 25px;
+        }
+
+        .vendas-recentes h3 {
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            font-size: 0.8rem;
+            padding: 15px;
+            background: #f1f5f9;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--borda);
+            font-size: 0.9rem;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pago { background: #dcfce7; color: #166534; }
+        .pendente { background: #fef9c3; color: #854d0e; }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header { flex-direction: column; text-align: center; gap: 20px; }
+            .vendas-recentes { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Relatório de Vendas</h1>
+            <div class="date-filter">
+                <input type="date" value="2026-03-14" style="padding: 8px; border-radius: 4px; border: 1px solid var(--borda);">
+            </div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span>Livros Vendidos</span>
+                <h2>142</h2>
+            </div>
+            <div class="stat-card money">
+                <span>Receita Total</span>
+                <h2>R$ 5.842,90</h2>
+            </div>
+            <div class="stat-card">
+                <span>Novos Leitores</span>
+                <h2>28</h2>
+            </div>
+        </section>
+
+        <section class="vendas-recentes">
+            <h3>Últimas Transações</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Livro</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#4501</td>
+                        <td><strong>Dom Casmurro</strong></td>
+                        <td>Carlos Andrade</td>
+                        <td>R$ 45,90</td>
+                        <td><span class="status-badge pago">Pago</span></td>
+                    </tr>
+                    <tr>
+                        <td>#4502</td>
+                        <td><strong>Sapiens</strong></td>
+                        <td>Mariana Silva</td>
+                        <td>R$ 54,00</td>
+                        <td><span class="status-badge pago">Pago</span></td>
+                    </tr>
+                    <tr>
+                        <td>#4503</td>
+                        <td><strong>1984</strong></td>
+                        <td>Roberto Carlos</td>
+                        <td>R$ 39,90</td>
+                        <td><span class="status-badge pendente">Pendente</span></td>
+                    </tr>
+                    <tr>
+                        <td>#4504</td>
+                        <td><strong>Torto Arado</strong></td>
+                        <td>Ana Paula</td>
+                        <td>R$ 54,00</td>
+                        <td><span class="status-badge pago">Pago</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+</body>
+</html>

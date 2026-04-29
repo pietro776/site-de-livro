@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Literário | BookHaven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f9f7f2;       /* Cor de papel leve */
+            --primaria: #2c3e50;  /* Azul escuro (tinta) */
+            --destaque: #8b4513;  /* Marrom (couro) */
+            --branco: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--primaria);
+            line-height: 1.6;
+        }
+
+        /* --- Barra de Navegação --- */
+        header {
+            background-color: var(--branco);
+            padding: 1rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--destaque);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primaria);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--destaque); }
+
+        /* --- Seção do Menu --- */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .titulo-secao {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .titulo-secao::after {
+            content: "";
+            width: 60px;
+            height: 3px;
+            background: var(--destaque);
+            display: block;
+            margin: 10px auto;
+        }
+
+        /* --- Grid de Livros --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .livro-card {
+            background: var(--branco);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .livro-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .capa-placeholder {
+            width: 100%;
+            height: 200px;
+            background: var(--primaria);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .livro-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .livro-titulo {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .livro-autor {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .livro-preco {
+            font-weight: 700;
+            color: var(--destaque);
+            font-size: 1.2rem;
+            margin-top: auto;
+        }
+
+        .btn-comprar {
+            margin-top: 15px;
+            background: var(--primaria);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-comprar:hover { background: var(--destaque); }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">BookHaven</a>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Ficção</a></li>
+                <li><a href="#">História</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">crud</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2 class="titulo-secao">Menu de Leituras</h2>
+
+        <div class="menu-grid">
+            <article class="livro-card">
+                <div class="capa-placeholder" style="background: #1a5276;">Dom Casmurro</div>
+                <div class="livro-info">
+                    <h3 class="livro-titulo">Dom Casmurro</h3>
+                    <p class="livro-autor">Machado de Assis</p>
+                    <p class="livro-preco">R$ 45,90</p>
+                    <a href="#" class="btn-comprar">Ver Detalhes</a>
+                </div>
+            </article>
+
+            <article class="livro-card">
+                <div class="capa-placeholder" style="background: #7b241c;">1984</div>
+                <div class="livro-info">
+                    <h3 class="livro-titulo">1984</h3>
+                    <p class="livro-autor">George Orwell</p>
+                    <p class="livro-preco">R$ 39,90</p>
+                    <a href="#" class="btn-comprar">Ver Detalhes</a>
+                </div>
+            </article>
+
+            <article class="livro-card">
+                <div class="capa-placeholder" style="background: #196f3d;">Sapiens</div>
+                <div class="livro-info">
+                    <h3 class="livro-titulo">Sapiens</h3>
+                    <p class="livro-autor">Yuval Noah Harari</p>
+                    <p class="livro-preco">R$ 54,00</p>
+                    <a href="#" class="btn-comprar">Ver Detalhes</a>
+                </div>
+            </article>
+
+            <article class="livro-card">
+                <div class="capa-placeholder" style="background: #7b241c;">Demon Slayer</div>
+                <div class="livro-info">
+                    <h3 class="livro-titulo">demon slayer</h3>
+                    <p class="livro-autor">pieto dias</p>
+                    <p class="livro-preco">r$ 100,00</p>
+                    <a href="#" class="btn-comprar">ver detalhes</a>
+                </div>
+            </article>
+        </div>
+    </div>
+
+</body>
+</html>
